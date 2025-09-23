@@ -22,7 +22,7 @@
       packages.${system}.default = pkgs.rustPlatform.buildRustPackage ({
         name = "icomidal";
         src = ./.;
-        cargoHash = "sha256-vaMAQmDT2ZCZTbI9Kp/5MOTbe1a1DFqTKlcQqvR4vxA=";
+        cargoHash = "sha256-AZ48f1BGGNh4gdJSAC5RFm6FPT3rETLrPbWjMp5TFD8=";
       } // common);
     };
 }
