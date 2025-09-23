@@ -14,5 +14,5 @@ Hardcoded features:
 
 The output of this program (updated daily) is available as-a-service at:
 
-https://deemz.org/public/komida.ical
+https://deemz.org/public/komida.ics
 
