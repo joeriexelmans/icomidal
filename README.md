@@ -10,6 +10,7 @@ Hardcoded features:
     - soup
  - menu items are in Dutch
  - calendar items match the opening hours of Komida (11:30 - 13:45)
+ - prints iCalendar output to stdout
 
 The output of this program (updated daily) is available as-a-service at:
 

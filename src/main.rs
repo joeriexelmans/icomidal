@@ -1,5 +1,7 @@
 use reqwest::blocking::get;
 use serde::Deserialize;
+use icalendar::Component;
+use icalendar::EventLike;
 
 const location_id: &str = "8199"; // Middelheim?
 const customer_id: &str = "7622"; // Me?
@@ -23,7 +25,9 @@ struct Response {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let now = chrono::Local::now();
 
-    println!("BEGIN:VCALENDAR");
+    let mut calendar = icalendar::Calendar::new();
+
+    calendar.name("Komida Menu");
 
     for days_in_future in 0..14 {
         let date = now + chrono::Days::new(days_in_future);
@@ -46,22 +50,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             if item.SectionName.contains("Streetfood")
              || item.SectionName.contains("Dailyfood")
              || item.SectionName.contains("Soep") {
-                // let d = NaiveDate::parse_from_str(&e.date, "%Y-%m-%d")?;
-                println!("BEGIN:VEVENT");
-                println!("SUMMARY:{}", item.MenuName);
-                println!("DTSTART:{}T{}Z",
-                    lunch_starts_at.format("%Y%m%d"),
-                    lunch_starts_at.format("%H%M%S"),
+                calendar.push(
+                    icalendar::Event::new()
+                        .summary(item.MenuName.as_str())
+                        .starts(lunch_starts_at)
+                        .ends(lunch_ends_at)
                 );
-                println!("DTEND:{}T{}Z",
-                    lunch_ends_at.format("%Y%m%d"),
-                    lunch_ends_at.format("%H%M%S"),
-                );
-                println!("END:VEVENT");
             }
         }
     }
 
-    println!("END:VCALENDAR");
+    println!("{}", calendar);
+
     Ok(())
 }
