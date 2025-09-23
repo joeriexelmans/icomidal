@@ -1,6 +1,6 @@
 # icomical - KOMIDA to iCal
 
-Fetches upcoming menu (14 days) from Komida JSON API and converts it to `.ical` format, to be imported into e.g., Google Calendar.
+Fetches upcoming menu (14 days) from Komida JSON API and converts it to `.ics` (iCalendar) format, to be imported into e.g., Google Calendar.
 
 Hardcoded features:
  - fetches up to 14 days in the future
