@@ -1,6 +1,6 @@
 # icomical - KOMIDA to iCal
 
-Fetches upcoming menu (14 days) from University of Antwerp's student restaurant JSON API and converts it to `.ics` ([iCalendar](https://icalendar.org/)) format, to be imported into e.g., Google Calendar.
+Fetches upcoming menu from University of Antwerp's student restaurant JSON API and converts it to `.ics` ([iCalendar](https://icalendar.org/)) format, to be imported into e.g., Google Calendar.
 
 Hardcoded features:
  - fetches up to 30 days in the future
