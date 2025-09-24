@@ -3,7 +3,7 @@
 Fetches upcoming menu (14 days) from Komida JSON API and converts it to `.ics` ([iCalendar](https://icalendar.org/)) format, to be imported into e.g., Google Calendar.
 
 Hardcoded features:
- - fetches up to 14 days in the future
+ - fetches up to 30 days in the future
  - only creates calendar items for:
     - daily menu
     - "street food"

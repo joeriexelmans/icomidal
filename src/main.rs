@@ -3,8 +3,8 @@ use serde::Deserialize;
 use icalendar::Component;
 use icalendar::EventLike;
 
-const location_id: &str = "8199"; // Middelheim?
-const customer_id: &str = "7622"; // Me?
+const LOCATION_ID: &str = "8199"; // Middelheim?
+const CUSTOMER_ID: &str = "7622"; // Me?
 
 #[derive(Deserialize)]
 struct MenuItem {
@@ -29,22 +29,26 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     calendar.name("Komida Menu");
 
-    for days_in_future in 0..14 {
+    for days_in_future in 0..30 {
         let date = now + chrono::Days::new(days_in_future);
 
         // komida API expects local time
         let date_komida_fmt = date.format("%Y-%m-%d");
 
-        let res: Response = get(format!(
+        let url = format!(
             "https://app.growzer.be/MenuPlanner/GetMenuPlanner?locationId={}&stringDate={}&customerId={}",
-            location_id,
+            LOCATION_ID,
             date_komida_fmt,
-            customer_id,
-        ))?.json()?;
+            CUSTOMER_ID,
+        );
+
+        eprintln!("fetching: {url}");
+
+        let res: Response = get(url)?.json()?;
 
         // ical uses UTC
-        let lunch_starts_at = date.with_time(chrono::NaiveTime::from_hms(11, 30, 00)).unwrap().to_utc();
-        let lunch_ends_at = date.with_time(chrono::NaiveTime::from_hms(13, 45, 00)).unwrap().to_utc();
+        let lunch_starts_at = date.with_time(chrono::NaiveTime::from_hms_opt(11, 30, 00).unwrap()).unwrap().to_utc();
+        let lunch_ends_at = date.with_time(chrono::NaiveTime::from_hms_opt(13, 45, 00).unwrap()).unwrap().to_utc();
 
         for item in res.data.menuPlannerList.iter() {
             if item.SectionName.contains("Streetfood")
