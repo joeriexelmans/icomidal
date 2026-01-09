@@ -53,10 +53,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         for item in res.data.menuPlannerList.iter() {
             if item.SectionName.contains("Streetfood")
              || item.SectionName.contains("Dailyfood")
+             || item.SectionName.contains("Maaltijd om op te warmen")
              || item.SectionName.contains("Soep") {
                 calendar.push(
                     icalendar::Event::new()
-                        .summary(item.MenuName.as_str())
+                        .summary(format!("{} ({})", item.MenuName.as_str(), item.SectionName).as_str())
                         .starts(lunch_starts_at)
                         .ends(lunch_ends_at)
                 );
