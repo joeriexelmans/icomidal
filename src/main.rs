@@ -52,7 +52,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
         for item in res.data.menuPlannerList.iter() {
             if item.SectionName.contains("Streetfood")
-             || item.SectionName.contains("Dailyfood")
+             || item.SectionName.contains("Daily")
              || item.SectionName.contains("Maaltijd om op te warmen")
              || item.SectionName.contains("Soep") {
                 calendar.push(
